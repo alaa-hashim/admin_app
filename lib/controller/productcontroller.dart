@@ -1,29 +1,24 @@
-import 'package:admin_app/model/catrgory.dart';
+import 'package:admin_app/data/datasource/remote/items.dart';
 import 'package:get/get.dart';
 
 import '../core/class/handledata.dart';
 import '../core/class/satusrequst.dart';
+import '../../../linkapi.dart';
 
-import '../core/constant/routes.dart';
-import '../data/datasource/remote/homedata.dart';
-
-abstract class HomeController extends GetxController {
+abstract class ProductController extends GetxController {
   Future<void> getData();
 }
 
-class HomeControllermpl extends HomeController {
-  Homedata homedata = Homedata(Get.find());
-  Category? caTegory;
+class ProductControllermpl extends ProductController {
+  ItemsData itemsData = ItemsData(Get.find());
 
-  List<dynamic> category = [];
-  List<dynamic> subcategory = [];
   List<dynamic> product = [];
   late String st;
   late StatusRequst statusrequst;
 
   @override
   void onInit() {
-    st = '1';
+    st = '3';
     // Initial value for st
     getData();
     super.onInit();
@@ -32,19 +27,15 @@ class HomeControllermpl extends HomeController {
   @override
   Future<void> getData() async {
     statusrequst = StatusRequst.loading;
-    var response = await homedata.postData(st);
+    var response = await itemsData.getData(AppLink.homepage, {"st": "3"});
     statusrequst = handlingData(response);
     if (statusrequst == StatusRequst.success) {
       if (response['status'] == "success") {
-        category.addAll(response['data']);
+        product.addAll(response['data']);
       } else {
         statusrequst = StatusRequst.failure;
       }
     }
     update();
-  }
-
-  gToedit(Category caTegory) {
-    Get.toNamed(AppRoute.editcategory, arguments: {"caTegory": caTegory});
   }
 }

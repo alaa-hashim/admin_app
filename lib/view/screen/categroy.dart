@@ -9,6 +9,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../controller/homecontroller.dart';
 import '../../core/class/handlindatview.dart';
 import '../../model/catrgory.dart';
+import '../widget/addcategory.dart';
+import '../widget/category.dart';
 
 class Cats extends StatelessWidget {
   const Cats({super.key});
@@ -35,9 +37,17 @@ class Cats extends StatelessWidget {
                         fontSize: 18,
                       ),
                     ),
-                    const Icon(
-                      Icons.add,
-                      size: 30,
+                    // ignore: prefer_const_constructors
+                    InkWell(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) => const Addcategory());
+                      },
+                      child: const Icon(
+                        Icons.add,
+                        size: 30,
+                      ),
                     )
                   ],
                 ),
@@ -65,28 +75,5 @@ class Cats extends StatelessWidget {
             ),
           ],
         ));
-  }
-}
-
-class Categories extends StatelessWidget {
-  final Category category;
-  const Categories({super.key, required this.category});
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      child: SizedBox(
-        height: 65,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 18.0, top: 28),
-          child: Text(
-            category.categoryName!,
-            style: GoogleFonts.lato(
-              fontWeight: FontWeight.w600,
-              color: AppColor.darkgray,
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }

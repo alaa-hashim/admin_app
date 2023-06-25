@@ -15,6 +15,7 @@
 //import 'package:admin_app/view/screen/subcategory.dart';
 import 'package:admin_app/view/screen/home.dart';
 import 'package:admin_app/view/screen/menu.dart';
+import 'package:admin_app/view/widget/editcategory.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 //import 'package:admin_app/view/screens/home.dart';
 //import 'package:admin_app/view/screens/product/productdetail.dart';
@@ -62,10 +63,10 @@ List<GetPage<dynamic>>? routes = [
   //  name: AppRoute.items,
   // page: () => const Productscreen(),
   //),
-  //GetPage(
-  //  name: AppRoute.productdetail,
-  // page: () => const Productdetial(),
-  //),
+  GetPage(
+    name: AppRoute.editcategory,
+    page: () => const Editcategory(),
+  ),
   //GetPage(
   // name: AppRoute.subcategory,
   // page: () => const Subcategory(),

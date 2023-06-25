@@ -1,19 +1,23 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'package:admin_app/controller/homecontroller.dart';
 import 'package:admin_app/core/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../controller/productcontroller.dart';
+import '../../core/functions/validater.dart';
 import '../../model/product.dart';
+import '../widget/custombutton.dart';
+import '../widget/showmodel.dart';
+import '../widget/textfiled.dart';
 
 class Items extends StatelessWidget {
   const Items({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    HomeControllermpl controller = Get.put(HomeControllermpl());
+    ProductControllermpl controller = Get.put(ProductControllermpl());
     List<Product> products = List<Product>.from(
         controller.product.map((data) => Product.fromJson(data)));
     List<int> displayedSubcatIds = [];
@@ -89,7 +93,7 @@ class Item extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      product.productName!.substring(0, 14),
+                      product.productName!,
                       style: GoogleFonts.lato(
                         fontWeight: FontWeight.w600,
                         color: AppColor.darkgray,
@@ -114,15 +118,71 @@ class Item extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 120, top: 10, bottom: 12, right: 6),
+                    left: 80, top: 10, bottom: 12, right: 6),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Icon(
-                      Icons.edit,
-                      color: AppColor.darkgray,
+                  children: [
+                    InkWell(
+                      onTap: () => showModalBottomSheet(
+                          context: context,
+                          builder: (context) => Column(
+                                children: [
+                                  const Showmodel(
+                                    title: Text("Update Item"),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 14.0,
+                                        bottom: 8,
+                                        right: 9,
+                                        left: 9),
+                                    child: CustomTextFormAuth(
+                                      hinttext: 'name',
+                                      iconData: Icons.abc,
+                                      isNumber: false,
+                                      labeltext: '',
+                                      isTextarea: true,
+                                      valid: (val) {
+                                        return inputvalidater(val!, 1, 30, "");
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: CustomTextFormAuth(
+                                      hinttext: 'name',
+                                      iconData: Icons.abc,
+                                      isNumber: false,
+                                      labeltext: '',
+                                      isTextarea: false,
+                                      valid: (val) {
+                                        return inputvalidater(val!, 1, 30, "");
+                                      },
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      CustomBuottn(
+                                        color: AppColor.primaryColor,
+                                        height: 65,
+                                        text: const Text(
+                                          'Update',
+                                          style:
+                                              TextStyle(color: AppColor.black),
+                                        ),
+                                        width: 90,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                      child: const Icon(
+                        Icons.edit,
+                        color: AppColor.darkgray,
+                      ),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(top: 8.0),
                       child: Icon(Icons.edit),
                     ),
