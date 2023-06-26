@@ -1,52 +1,167 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/authcontroller.dart';
+import '../../../controller/auth/logincontroller.dart';
+import '../../../core/constant/color.dart';
+import '../../../core/functions/appexit.dart';
+import '../../../core/functions/validater.dart';
+import '../../widget/authbutton.dart';
 
 class Loginscreen extends StatelessWidget {
   const Loginscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    AuthController controller = Get.put(AuthController());
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextField(
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Phone Number',
-                  hintText: 'Enter valid number'),
-              controller: controller.numController,
+    LoginController controller = Get.put(LoginController());
+
+    return WillPopScope(
+      onWillPop: appExit,
+      child: SafeArea(
+          child: Scaffold(
+        backgroundColor: AppColor.bg,
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            padding: const EdgeInsets.all(15),
+            child: Form(
+              key: controller.fromstate1,
+              child: ListView(
+                children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(18.0),
+                    child: Text(
+                      "Login your Account",
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (val) {
+                        return inputvalidater(val!, 1, 30, "");
+                      },
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Email',
+                          hintText: 'Enter Email Address'),
+                      controller: controller.email,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: TextFormField(
+                      obscureText: true,
+                      validator: (val) {
+                        return inputvalidater(val!, 1, 30, "");
+                      },
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Password',
+                          hintText: 'Enter Your Password'),
+                      controller: controller.password,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Text(
+                        "Froget password",
+                        textAlign: TextAlign.end,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: AppColor.primaryColor,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      width: 230,
+                      height: 55,
+                      child: MaterialButton(
+                        onPressed: () {
+                          Future.delayed(Duration.zero, () {
+                            controller.login();
+                          });
+                        },
+                        textColor: AppColor.white,
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(
+                              fontSize: 19, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SignupButton(
+                      onTap: () {
+                        controller.goToSignUp();
+                      },
+                      textone: "Dont have an account ? ",
+                      texttwo: 'SignUp',
+                    ),
+                  ),
+                  const Divider(
+                    thickness: 1,
+                    color: AppColor.lightgray,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Coutnue with Accounts ",
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                              color: AppColor.lightred,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          width: 140,
+                          height: 55,
+                          child: MaterialButton(
+                            onPressed: () {},
+                            textColor: AppColor.red,
+                            child: const Text("GOOGLE"),
+                          ),
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                              color: AppColor.lightblue,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          width: 150,
+                          height: 55,
+                          child: MaterialButton(
+                            onPressed: () {},
+                            textColor: AppColor.blue,
+                            child: const Text("FACEBOOK"),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: TextField(
-              obscureText: true,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                  hintText: 'Enter valid password'),
-              controller: controller.otpController,
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              controller.fetchotp();
-            },
-            child: const Text("Fetch OTP"),
-          ),
-          TextButton(
-              onPressed: () {
-                controller.verify();
-              },
-              child: const Text("Send"))
-        ],
-      ),
+        ),
+      )),
     );
   }
 }

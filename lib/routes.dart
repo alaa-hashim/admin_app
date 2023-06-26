@@ -14,6 +14,8 @@
 //import 'package:admin_app/view/screen/productdetils.dart';
 //import 'package:admin_app/view/screen/subcategory.dart';
 
+import 'package:admin_app/view/screen/auth/login.dart';
+import 'package:admin_app/view/screen/auth/signup.dart';
 import 'package:admin_app/view/screen/home.dart';
 import 'package:admin_app/view/screen/menu.dart';
 import 'package:admin_app/view/screen/settings.dart';
@@ -29,8 +31,9 @@ import 'core/constant/routes.dart';
 List<GetPage<dynamic>>? routes = [
   GetPage(
     name: "/",
-    page: () => const Home(),
+    page: () => const Loginscreen(),
   ),
+  GetPage(name: AppRoute.login, page: () => const Loginscreen()),
   GetPage(
     name: AppRoute.menu,
     page: () => const Menu(),

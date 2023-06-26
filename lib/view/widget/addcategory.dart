@@ -1,7 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:admin_app/core/functions/validater.dart';
-import 'package:admin_app/view/widget/textfiled.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

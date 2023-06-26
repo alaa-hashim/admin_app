@@ -60,6 +60,7 @@ dependencies:
   cloud_firestore: ^4.8.1
   firebase_auth: ^4.6.3
   flutter_otp_text_field: ^1.1.1
+  firebase_storage: ^11.2.3
   
 
 dev_dependencies:
