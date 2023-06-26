@@ -47,4 +47,16 @@ class HomeControllermpl extends HomeController {
   gToedit(Category caTegory) {
     Get.toNamed(AppRoute.editcategory, arguments: {"caTegory": caTegory});
   }
+
+  goToMenu() {
+    Get.toNamed(AppRoute.menu);
+  }
+
+  goToHome() {
+    Get.toNamed(AppRoute.homepage);
+  }
+
+  gotoSettings() {
+    Get.toNamed(AppRoute.settings);
+  }
 }

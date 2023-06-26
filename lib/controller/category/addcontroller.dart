@@ -47,6 +47,7 @@ class AddcategoriesController extends GetxController {
       if (StatusRequst.success == statusRequst) {
         if (response['status'] == 'success') {
           Get.back();
+          print(data);
         } else {
           statusRequst = StatusRequst.serverfailure;
         }

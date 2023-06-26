@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:admin_app/view/widget/editcategory.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

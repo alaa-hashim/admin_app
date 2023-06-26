@@ -24,7 +24,7 @@ class Editcategory extends StatelessWidget {
               height: 50,
               width: double.infinity,
               decoration: const BoxDecoration(color: AppColor.lightgray),
-              child: const Center(child: Text("Add Category"))),
+              child: const Center(child: Text("Update Category"))),
           const SizedBox(
             height: 25,
           ),
@@ -61,7 +61,7 @@ class Editcategory extends StatelessWidget {
             child: InkWell(
               onTap: () => controller.addData(),
               child: CustomBuottn(
-                color: AppColor.primaryColor,
+                color: AppColor.green,
                 height: 65,
                 text: const Text(
                   'Update',

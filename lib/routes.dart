@@ -13,8 +13,10 @@
 //import 'package:admin_app/view/screen/items.dart';
 //import 'package:admin_app/view/screen/productdetils.dart';
 //import 'package:admin_app/view/screen/subcategory.dart';
+
 import 'package:admin_app/view/screen/home.dart';
 import 'package:admin_app/view/screen/menu.dart';
+import 'package:admin_app/view/screen/settings.dart';
 import 'package:admin_app/view/widget/editcategory.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 //import 'package:admin_app/view/screens/home.dart';
@@ -27,9 +29,17 @@ import 'core/constant/routes.dart';
 List<GetPage<dynamic>>? routes = [
   GetPage(
     name: "/",
+    page: () => const Home(),
+  ),
+  GetPage(
+    name: AppRoute.menu,
     page: () => const Menu(),
   ),
-  //GetPage(name: AppRoute.login, page: () => const Login()),
+  GetPage(
+    name: AppRoute.settings,
+    page: () => const Settings(),
+  ),
+
   //GetPage(name: AppRoute.signup, page: () => const Signup()),
   //GetPage(
   //name: AppRoute.frogetpassword,

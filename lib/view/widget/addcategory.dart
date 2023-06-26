@@ -29,31 +29,29 @@ class Addcategory extends StatelessWidget {
             height: 25,
           ),
           Padding(
-            padding:
-                const EdgeInsets.only(top: 14.0, bottom: 8, right: 9, left: 9),
-            child: CustomTextFormAuth(
-              hinttext: 'English Name',
-              isNumber: false,
-              labeltext: 'English Name',
-              isTextarea: true,
-              valid: (val) {
+            padding: const EdgeInsets.all(10),
+            child: TextFormField(
+              validator: (val) {
                 return inputvalidater(val!, 1, 30, "");
               },
-              mycontroller: controller.name,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'English Name',
+                  hintText: 'Enter English Name'),
+              controller: controller.name,
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.only(top: 14.0, bottom: 8, right: 9, left: 9),
-            child: CustomTextFormAuth(
-              hinttext: 'Arabic Name',
-              isNumber: false,
-              labeltext: 'Arabic Name',
-              isTextarea: true,
-              valid: (val) {
+            padding: const EdgeInsets.all(10),
+            child: TextFormField(
+              validator: (val) {
                 return inputvalidater(val!, 1, 30, "");
               },
-              mycontroller: controller.namear,
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Arabic Name',
+                  hintText: 'Enter Arabic Name'),
+              controller: controller.namear,
             ),
           ),
           Padding(

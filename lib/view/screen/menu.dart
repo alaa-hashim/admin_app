@@ -2,6 +2,7 @@ import 'package:admin_app/view/screen/product.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/constant/color.dart';
+import '../widget/drawer.dart';
 import 'categroy.dart';
 import 'subcategory.dart';
 
@@ -10,11 +11,12 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(),
-          body: Column(children: [
+    return Scaffold(
+        appBar: AppBar(),
+        drawer: const Drawer(backgroundColor: AppColor.blue, child: Drawerx()),
+        body: DefaultTabController(
+          length: 3,
+          child: Column(children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(

@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 
 import '../../core/functions/uploadimage.dart';
 
-class CategoriesController extends GetxController {
+class EditCategoriesController extends GetxController {
   CatData catData = CatData(Get.find());
   GlobalKey<FormState> formState = GlobalKey<FormState>();
   late TextEditingController name;
