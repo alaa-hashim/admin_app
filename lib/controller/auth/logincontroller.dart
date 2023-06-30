@@ -1,35 +1,40 @@
-// ignore_for_file: avoid_print
-
-import 'package:admin_app/core/constant/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginController extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  GlobalKey<FormState> fromstate1 = GlobalKey<FormState>();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  final GlobalKey<FormState> formState = GlobalKey<FormState>();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController password = TextEditingController();
 
   void login() async {
-    try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: email.text,
-        password: password.text,
-      );
+    if (formState.currentState.validate()) {
+      try {
+        UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+          email: email.text,
+          password: password.text,
+        );
 
-      print('User logged in: ${userCredential.user?.email}');
-    } catch (e) {
-      print('Login error: $e');
+        if (userCredential.user != null) {
+          Get.snackbar('Login Successful', 'You have been logged in.',
+              snackPosition: SnackPosition.BOTTOM);
+          // Navigate to home screen
+          Get.offAllNamed(AppRoute.home);
+        }
+      } catch (e) {
+        Get.snackbar('Login Failed', 'Email or password is incorrect.',
+            snackPosition: SnackPosition.BOTTOM);
+        print('Login error: $e');
+      }
     }
   }
 
   @override
-  void onInit() {
-    email = TextEditingController();
-    password = TextEditingController();
-    login();
-    super.onInit();
+  void onClose() {
+    email.dispose();
+    password.dispose();
+    super.onClose();
   }
 
   goToSignUp() {
